@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.0)
-project(Q5LegacyStyle)
+cmake_minimum_required(VERSION 3.16)
+project(QLegacyStyle)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -11,16 +11,22 @@ set(CMAKE_AUTOUIC ON)
 # Find the QtWidgets library
 find_package(Qt5Widgets CONFIG REQUIRED)
 
-set(q5legacystyle_SRC
+set(qlegacystyle_SRC
   src/main.cpp
-  src/q5legacystyle.cpp
-)
+  src/qlegacystyle.h
+  src/qlegacystyle.cpp
+  src/widgetgallery.h
+  src/widgetgallery.cpp
+  src/drawutil.h
+  src/drawutil.cpp
+  src/bitmaps.h
+  )
 
 # Tell CMake to create the helloworld executable
-add_executable(q5legacystyle ${q5legacystyle_SRC})
+add_executable(qlegacystyle ${qlegacystyle_SRC})
 
 # Use the Widgets module from Qt 5.
-target_link_libraries(q5legacystyle Qt5::Widgets)
+target_link_libraries(qlegacystyle Qt5::Widgets)
 
 # Install the executable
-install(TARGETS q5legacystyle DESTINATION bin)
+install(TARGETS qlegacystyle DESTINATION bin)

@@ -47,24 +47,87 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-#include <iostream>
-#include <QApplication>
-#include <QScreen>
-#include "qlegacystyle.h"
-#include "widgetgallery.h"
 
-int main(int argc, char *argv[])
+#ifndef WIDGETGALLERY_H
+#define WIDGETGALLERY_H
+
+#include <QDialog>
+
+QT_BEGIN_NAMESPACE
+class QCheckBox;
+class QComboBox;
+class QDateTimeEdit;
+class QDial;
+class QGroupBox;
+class QLabel;
+class QLineEdit;
+class QProgressBar;
+class QPushButton;
+class QRadioButton;
+class QScrollBar;
+class QSlider;
+class QSpinBox;
+class QTabWidget;
+class QTableWidget;
+class QTextEdit;
+QT_END_NAMESPACE
+
+//! [0]
+class WidgetGallery : public QDialog
 {
+    Q_OBJECT
 
-    QScreen *screen = QGuiApplication::primaryScreen();
-    if (screen != nullptr){
-    std::cout << "screen colour depth: " << screen->depth() << std::endl;
-    }
-    
-    
-    QApplication app(argc, argv);
-    QApplication::setStyle(new QLegacyStyle(QLegacyStyle::Default));
-    WidgetGallery gallery;
-    gallery.show();
-    return app.exec();
-}
+public:
+    WidgetGallery(QWidget *parent = nullptr);
+
+protected:
+    void changeEvent(QEvent *) override;
+
+private slots:
+    void changeStyle(const QString &styleName);
+    void styleChanged();
+    void changePalette();
+    void advanceProgressBar();
+
+private:
+    void createTopLeftGroupBox();
+    void createTopRightGroupBox();
+    void createBottomLeftTabWidget();
+    void createBottomRightGroupBox();
+    void createProgressBar();
+
+    QLabel *styleLabel;
+    QComboBox *styleComboBox;
+    QCheckBox *useStylePaletteCheckBox;
+    QCheckBox *disableWidgetsCheckBox;
+//! [0]
+
+    QGroupBox *topLeftGroupBox;
+    QRadioButton *radioButton1;
+    QRadioButton *radioButton2;
+    QRadioButton *radioButton3;
+    QCheckBox *checkBox;
+
+    QGroupBox *topRightGroupBox;
+    QPushButton *defaultPushButton;
+    QPushButton *togglePushButton;
+    QPushButton *flatPushButton;
+
+    QTabWidget *bottomLeftTabWidget;
+    QTableWidget *tableWidget;
+    QTextEdit *textEdit;
+
+    QGroupBox *bottomRightGroupBox;
+    QLineEdit *lineEdit;
+    QSpinBox *spinBox;
+    QDateTimeEdit *dateTimeEdit;
+    QSlider *slider;
+    QScrollBar *scrollBar;
+    QDial *dial;
+
+    QProgressBar *progressBar;
+//! [1]
+};
+//! [1]
+
+#endif
