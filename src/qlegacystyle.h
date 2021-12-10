@@ -50,7 +50,7 @@
         
         void unpolish(QWidget * widget) override;
         
-        int styleHint(QStyle::StyleHint stylehint, const QStyleOption * opt, const QWidget * widget, QStyleHintReturn * returnData) const override;
+        int styleHint(QStyle::StyleHint stylehint, const QStyleOption * opt, const QWidget * widget, QStyleHintReturn * returnData = nullptr) const override;
     protected:
         void drawArrow(PrimitiveElement pe, QPainter* p, const QStyleOption* opt, const QWidget* w) const;
         void renderGradient( QPainter* p,

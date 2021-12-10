@@ -2031,10 +2031,55 @@ QIcon QLegacyStyle::standardIcon(QStyle::StandardPixmap standardIcon, const QSty
 
 int QLegacyStyle::styleHint(QStyle::StyleHint stylehint, const QStyleOption* opt, const QWidget* widget, QStyleHintReturn* returnData) const
 {
-    switch(stylehint){
-        default: return QCommonStyle::styleHint(stylehint, opt, widget, returnData);
-    }
+   int ret;
 
+	switch (stylehint) {
+        case SH_EtchDisabledText:
+			return 1;
+
+		case SH_Menu_Scrollable:
+			return 1;
+
+		case SH_MenuBar_AltKeyNavigation:
+			return 1;
+
+		case SH_Menu_SubMenuPopupDelay:
+			if ( styleHint( SH_Menu_SloppySubMenus, opt, widget ) )
+				return 100;
+			else
+				return 250;
+
+		case SH_Menu_SloppySubMenus:
+			return false;
+
+		case SH_ItemView_ChangeHighlightOnFocus:
+		case SH_Slider_SloppyKeyEvents:
+		case SH_MainWindow_SpaceBelowMenuBar:
+		case SH_Menu_AllowActiveAndDisabled:
+			return 0;
+
+		case SH_Slider_SnapToValue:
+		case SH_PrintDialog_RightAlignButtons:
+		case SH_FontDialog_SelectAssociatedText:
+		case SH_MenuBar_MouseTracking:
+		case SH_Menu_MouseTracking:
+		case SH_ComboBox_ListMouseTracking:
+		case SH_ScrollBar_MiddleClickAbsolutePosition:
+			return 1;
+		case SH_LineEdit_PasswordCharacter:
+		{
+			const QFontMetrics &fm = opt->fontMetrics;
+            if (fm.inFont(QChar(0x25CF))) {
+                return 0x25CF;
+            } else if (fm.inFont(QChar(0x2022))) {
+                return 0x2022;
+            }
+			return '*';
+		}
+
+		default:
+			return QCommonStyle::styleHint(stylehint, opt, widget, returnData);
+	}
 }
 
 QRect QLegacyStyle::subControlRect(QStyle::ComplexControl cc, const QStyleOptionComplex* opt, QStyle::SubControl sc, const QWidget* widget) const
