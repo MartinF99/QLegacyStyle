@@ -25,9 +25,9 @@
         void drawComplexControl(QStyle::ComplexControl cc, const QStyleOptionComplex * opt, QPainter * p, const QWidget * widget) const override;
         
         QStyle::SubControl hitTestComplexControl(QStyle::ComplexControl cc, const QStyleOptionComplex * opt, const QPoint & pt, const QWidget * widget) const override;
-        
-        QSize sizeFromContents(QStyle::ContentsType ct, const QStyleOption * opt, const QSize & contentsSize, const QWidget * w) const override;
-        
+
+        QSize sizeFromContents(ContentsType ct, const QStyleOption* opt, const QSize& contentsSize, const QWidget* widget) const override;
+
         QPixmap generatedIconPixmap(QIcon::Mode iconMode, const QPixmap & pixmap, const QStyleOption * opt) const override;
         
         QIcon standardIcon(QStyle::StandardPixmap standardIcon, const QStyleOption * option, const QWidget * widget) const override;
@@ -76,8 +76,6 @@
         void drawVerticalProgressBar(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
         void drawProgressBarLabel(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
         void drawHorizontalProgressBar(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
-        void drawSliderGroove(const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget = nullptr) const;
-        void drawSliderHandle(const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget = nullptr) const;
      private:
         QBitmap xBmp;
         // formerly Statics (I don't like them there)
