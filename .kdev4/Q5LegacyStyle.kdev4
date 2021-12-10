@@ -39,3 +39,13 @@ isExecutable=false
 
 [Project]
 VersionControlSupport=kdevgit
+
+[SourceFormatter]
+UseDefault=false
+text/x-c++hdr=kdevcustomscript||kdev_format_source
+text/x-c++src=kdevcustomscript||kdev_format_source
+text/x-chdr=kdevcustomscript||GNU_indent_GNU
+text/x-csharp=kdevcustomscript||GNU_indent_GNU
+text/x-csrc=kdevcustomscript||GNU_indent_GNU
+text/x-java=kdevcustomscript||GNU_indent_GNU
+text/x-objcsrc=kdevcustomscript||GNU_indent_GNU

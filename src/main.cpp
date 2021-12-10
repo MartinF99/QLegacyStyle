@@ -56,10 +56,6 @@
 int main(int argc, char *argv[])
 {
 
-    QScreen *screen = QGuiApplication::primaryScreen();
-    if (screen != nullptr){
-    std::cout << "screen colour depth: " << screen->depth() << std::endl;
-    }
     
     
     QApplication app(argc, argv);

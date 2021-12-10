@@ -3,33 +3,9 @@
 
 #include <QCommonStyle>
 #include <QBitmap>
-#include <QHash>
 #include <QPixmap>
 
     
-    enum GradientType{ VSmall=0, VMed, VLarge, HMed, HLarge};
-    
-    class GradientSet
-    {
-    public:
-        GradientSet(const QColor &baseColor);
-        GradientSet();
-        ~GradientSet();
-        QLinearGradient* gradient(GradientType type);
-        QColor* color() { return(&c); }
-        int getGradientSize(GradientType t);
-    private:
-        static const int gradientCount = 5;
-        const int vSmallHeight =24;
-        const int vMedHeight = 34;
-        const int vLargeHeight = 64;
-        const int hMedWidth = 34;
-        const int hLargeWidth = 54;
-        const int vWidth = 18;
-        const int hHeight = 18;
-        QLinearGradient *gradients[gradientCount];
-        QColor c;
-    };
     
     class QLegacyStyle : public QCommonStyle
     {
@@ -76,7 +52,7 @@
         
         int styleHint(QStyle::StyleHint stylehint, const QStyleOption * opt, const QWidget * widget, QStyleHintReturn * returnData) const override;
     protected:
-        void drawArrow(QStyle::PrimitiveElement pe, QPainter *p, const QStyleOption *opt, const QWidget *w) const;
+        void drawArrow(PrimitiveElement pe, QPainter* p, const QStyleOption* opt, const QWidget* w) const;
         void renderGradient( QPainter* p,
                              const QRect& r,
                              QColor clr,
@@ -86,9 +62,22 @@
                              int pwidth=-1,
                              int pheight=-1 )
         const;
+        QBrush mapBrushToRect(const QBrush &brush, const QRectF &rect) const;
+        QLinearGradient mapGradientToRect(const QLinearGradient &gradient, const QRectF &rect) const;
+        QRadialGradient mapGradientToRect(const QRadialGradient &gradient, const QRectF &rect) const;
+        QConicalGradient mapGradientToRect(const QConicalGradient &gradient, const QRectF &rect) const;
+        //disabled for now
+        //void childEvent(QChildEvent * event) override;
+        void drawTabShape(const QStyleOption *option, QPainter *painter, const QWidget *widget=nullptr) const;
         StyleType type;
         bool highcolor;
         mutable bool selectionBackground;
+        void drawComboBox(const QStyleOption *option, QPainter *painter, const QWidget *widget = nullptr);
+        void drawVerticalProgressBar(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
+        void drawProgressBarLabel(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
+        void drawHorizontalProgressBar(const QStyleOption *opt, QPainter *p, const QWidget *widget = nullptr) const;
+        void drawSliderGroove(const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget = nullptr) const;
+        void drawSliderHandle(const QStyleOptionComplex *opt, QPainter *p, const QWidget *widget = nullptr) const;
      private:
         QBitmap xBmp;
         // formerly Statics (I don't like them there)
@@ -97,7 +86,6 @@
         QBitmap *dgrayBmp;
         QBitmap *centerBmp;
         QBitmap *maskBmp;
-        QHash<int, GradientSet *> *gDict;
     };
 
 #endif // Q5LEGACYSTYLE_H

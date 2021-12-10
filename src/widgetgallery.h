@@ -70,6 +70,7 @@ class QSpinBox;
 class QTabWidget;
 class QTableWidget;
 class QTextEdit;
+//class QToolBox;
 QT_END_NAMESPACE
 
 //! [0]
@@ -116,6 +117,7 @@ private:
     QTabWidget *bottomLeftTabWidget;
     QTableWidget *tableWidget;
     QTextEdit *textEdit;
+   // QWidget *thirdTabWidget;
 
     QGroupBox *bottomRightGroupBox;
     QLineEdit *lineEdit;

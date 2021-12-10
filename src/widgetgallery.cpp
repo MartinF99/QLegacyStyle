@@ -246,7 +246,9 @@ void WidgetGallery::createBottomLeftTabWidget()
     bottomLeftTabWidget = new QTabWidget;
     bottomLeftTabWidget->setSizePolicy(QSizePolicy::Preferred,
                                        QSizePolicy::Ignored);
-
+    //bottomLeftTabWidget->setTabShape(QTabWidget::TriangularNorth);
+//     bottomLeftTabWidget->setTabShape(QTabWidget::Rounded);
+//     bottomLeftTabWidget->setTabPosition(QTabWidget::East);
     QWidget *tab1 = new QWidget;
     tableWidget = new QTableWidget(10, 10);
 
@@ -270,8 +272,12 @@ void WidgetGallery::createBottomLeftTabWidget()
     tab2hbox->addWidget(textEdit);
     tab2->setLayout(tab2hbox);
 
+    QWidget *tab3 = new QWidget;
+
+
     bottomLeftTabWidget->addTab(tab1, tr("&Table"));
     bottomLeftTabWidget->addTab(tab2, tr("Text &Edit"));
+    bottomLeftTabWidget->addTab(tab3, tr("Empty &Tab"));
 }
 
 void WidgetGallery::createBottomRightGroupBox()
