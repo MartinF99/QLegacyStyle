@@ -50,7 +50,6 @@
 #include <iostream>
 #include <QApplication>
 #include <QScreen>
-#include "qlegacystyle.h"
 #include "widgetgallery.h"
 
 int main(int argc, char *argv[])
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
     
     
     QApplication app(argc, argv);
-    QApplication::setStyle(new QLegacyStyle(QLegacyStyle::Default));
+    //QApplication::setStyle(new QLegacyStyle(QLegacyStyle::Default));
     WidgetGallery gallery;
     gallery.show();
     return app.exec();
