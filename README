@@ -1,18 +1,11 @@
-CMake Qt5 GUI Template
+# QLegacyStyle
 ----------------------
+## CURRENTLY NOT WORKING, it can cause crashes and similar issues
 
 You need Qt5 and CMake 2.8.11 or higher
 
--- Build instructions --
+## Build instructions
 
-cd /your/project/build
+cd build
 cmake ../
 make
-
-./q5legacystyle
-
-
--- Tutorials and resources --
-
-Qt online docs
-https://doc.qt.io/
