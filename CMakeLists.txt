@@ -31,7 +31,7 @@ set(widgetgallery_SRC
     src/main.cpp
     )
 # Tell CMake to create a library
-add_library(qlegacystyle MODULE ${qlegacystyle_SRC})
+add_library(qlegacystyle SHARED ${qlegacystyle_SRC})
 
 # Use the Widgets module from Qt 5.
 target_link_libraries(qlegacystyle Qt::Core Qt::Gui Qt::Widgets)
@@ -39,7 +39,7 @@ target_link_libraries(qlegacystyle Qt::Core Qt::Gui Qt::Widgets)
 # tell Cmake to add an executable
 add_executable(widgetgallery ${widgetgallery_SRC})
 
-target_link_libraries(widgetgallery PRIVATE Qt5::Widgets)
+target_link_libraries(widgetgallery PRIVATE Qt5::Widgets qlegacystyle)
 
 get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
 execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS

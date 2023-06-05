@@ -77,11 +77,11 @@ static const int rightBorder     = 12;
 
 
 
-QLegacyStyle::QLegacyStyle(StyleType t) : QCommonStyle()
+QLegacyStyle::QLegacyStyle(QLegacyStyle::StyleType t) : QCommonStyle()
 {
   type = t;
 
-  highcolor = (type == StyleType::HighColor);
+  highcolor = (type == QLegacyStyle::StyleType::HighColor);
   xBmp = QBitmap(QBitmap::fromData(QSize(7,7), x_bits));
   lightBmp  = new QBitmap(QBitmap::fromData(QSize(13, 13), radiooff_light_bits));
   grayBmp   = new QBitmap(QBitmap::fromData(QSize(13, 13), radiooff_gray_bits));
@@ -133,41 +133,41 @@ void QLegacyStyle::drawControl(QStyle::ControlElement element, const QStyleOptio
       drawPrimitive(PE_IndicatorDockWidgetResizeHandle, opt, p, w);
       break;
       // Button for real now
-      //        case QStyle::CE_PushButton:
-      //        {
-      //            const QStyleOptionButton *buttonOpt = qstyleoption_cast<const QStyleOptionButton *>(opt);
-      //            if(type != HighColor)
-      //            {
-      //                QRect br = buttonOpt -> rect;
-      //                bool btnDefault = buttonOpt->features & QStyleOptionButton::DefaultButton;
-      //                bool btnAutoDefault = buttonOpt->features & QStyleOptionButton::DefaultButton;
+             case QStyle::CE_PushButton:
+             {
+                 const QStyleOptionButton *buttonOpt = qstyleoption_cast<const QStyleOptionButton *>(opt);
+                 if(type != HighColor)
+                 {
+                     QRect br = buttonOpt -> rect;
+                     bool btnDefault = buttonOpt->features & QStyleOptionButton::DefaultButton;
+                     bool btnAutoDefault = buttonOpt->features & QStyleOptionButton::DefaultButton;
 
-      //                if(btnDefault || btnAutoDefault)
-      //                {
-      //                    static int di = pixelMetric(PM_DefaultFrameWidth, opt, w);
-      //                    br.adjust(di, di, -di, -di);
-      //                }
-      //                if(btnDefault)
-      //                {
-      //                    drawPrimitive(PE_FrameDefaultButton, opt, p, w);
-      //                }
+                     if(btnDefault || btnAutoDefault)
+                     {
+                         static int di = pixelMetric(PM_DefaultFrameWidth, opt, w);
+                         br.adjust(di, di, -di, -di);
+                     }
+                     if(btnDefault)
+                     {
+                         drawPrimitive(PE_FrameDefaultButton, opt, p, w);
+                     }
 
-      //                QStyleOptionButton newOpt = *buttonOpt;
-      //                newOpt.rect = br;
+                     QStyleOptionButton newOpt = *buttonOpt;
+                     newOpt.rect = br;
 
-      //                drawPrimitive(PE_PanelButtonCommand, &newOpt, p, w);
-      //                //drawPrimitive(QStyle::PE_FrameButtonBevel, &newOpt, p, w);
-      //                drawPrimitive(QStyle::PE_PanelButtonBevel, &newOpt, p, w);
-      //                drawControl(CE_PushButtonLabel, &newOpt, p, w);
-      //            }
-      //            else{
-      //                drawPrimitive(PE_PanelButtonCommand, opt, p, w);
-      //                drawPrimitive(QStyle::PE_PanelButtonBevel, opt, p, w);
-      //                drawControl(CE_PushButtonLabel, opt, p, w);
-      //            }
+                     drawPrimitive(PE_PanelButtonCommand, &newOpt, p, w);
+                     drawPrimitive(QStyle::PE_FrameButtonBevel, &newOpt, p, w);
+                     drawPrimitive(QStyle::PE_PanelButtonBevel, &newOpt, p, w);
+                     drawControl(CE_PushButtonLabel, &newOpt, p, w);
+                 }
+                 else{
+                     drawPrimitive(PE_PanelButtonCommand, opt, p, w);
+                     drawPrimitive(QStyle::PE_PanelButtonBevel, opt, p, w);
+                     drawControl(CE_PushButtonLabel, opt, p, w);
+                 }
 
-      //            break;
-      //        }
+                 break;
+             }
     case QStyle::CE_TabBarTabShape:
       {
         const QStyleOptionTab *tabOpts = qstyleoption_cast<const QStyleOptionTab *>(opt);
@@ -1032,8 +1032,8 @@ void QLegacyStyle::drawComplexControl(QStyle::ComplexControl cc, const QStyleOpt
                 newOpt.palette = comboOpt->palette;
                 drawPrimitive(PE_FrameFocusRect, &newOpt, p, widget); // find a better way of drawing comboboxes;
               }
-            //drawPrimitive(PE_PanelLineEdit, opt, p, widget);
-            //drawControl(CE_ComboBoxLabel, opt, p, widget)));
+              //drawPrimitive(PE_PanelLineEdit, opt, p, widget);
+              //drawControl(CE_ComboBoxLabel, opt, p, widget); // apparently the label isn't drawn by QCommonStyle
           }
         else  // everything else drawn by QCommonStyle
           {QCommonStyle::drawComplexControl(cc, opt, p, widget);}
@@ -1901,7 +1901,7 @@ void QLegacyStyle::polish(QWidget* widget)
       widget->setAttribute(Qt::WA_Hover, true);
     }
   // Make the combobox menu also hoverable (maybe?)
-  //QCommonStyle::polish(widget);
+  QCommonStyle::polish(widget);
 }
 QSize QLegacyStyle::sizeFromContents(QStyle::ContentsType ct, const QStyleOption* opt, const QSize& contentsSize, const QWidget* widget) const
 {
